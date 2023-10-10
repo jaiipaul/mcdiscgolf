@@ -1,3 +1,5 @@
 {
-    "item.mcdiscgolf.frisbee": "Frisbee"
+    "itemgroup.discgolf": "Disc Golf",
+    "item.mcdiscgolf.frisbee": "Frisbee",
+    "block.mcdiscgolf.basket": "Disc Golf Basket"
 }
