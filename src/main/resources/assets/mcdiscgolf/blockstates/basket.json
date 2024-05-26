@@ -1,7 +1,10 @@
 {
     "variants": {
-        "": {
-            "model": "mcdiscgolf:block/basket"
-        }
+        "half=lower": {
+            "model": "mcdiscgolf:block/basket_base"
+          },
+        "half=upper": {
+            "model": "mcdiscgolf:block/basket_chains"
+          }
     }
 }

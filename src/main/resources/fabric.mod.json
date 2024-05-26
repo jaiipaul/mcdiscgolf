@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "mcdiscgolf",
-	"version": "${version}",
+	"version": "dev",
 	"name": "McDiscGolf",
 	"description": "Play Disc Golf in Minecraft !!",
 	"authors": [

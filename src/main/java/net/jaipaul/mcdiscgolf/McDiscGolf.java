@@ -3,6 +3,7 @@ package net.jaipaul.mcdiscgolf;
 import net.fabricmc.api.ModInitializer;
 import net.jaipaul.mcdiscgolf.blocks.ModBlocks;
 import net.jaipaul.mcdiscgolf.blocks.entity.ModBlockEntities;
+import net.jaipaul.mcdiscgolf.entity.ModEntities;
 import net.jaipaul.mcdiscgolf.item.ModItemGroup;
 import net.jaipaul.mcdiscgolf.item.ModItems;
 import net.jaipaul.mcdiscgolf.screen.ModScreens;
@@ -20,6 +21,7 @@ public class McDiscGolf implements ModInitializer {
 	public void onInitialize() {
 		ModItemGroup.registerItemGroup();
 		ModItems.registerModItems();
+		ModEntities.registerModEntities();
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
 		ModScreens.registerModScreenHandlers();

@@ -13,16 +13,18 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    public static final Block BASKET_BLOCK = registerBlock("basket", new BasketBlock(FabricBlockSettings.create().nonOpaque()));
+    public static final Block BASKET_BLOCK = registerBlock("basket", new BasketBlock(FabricBlockSettings.create().nonOpaque().collidable(true)), false);
 
     private static Item registerBlockItem(String name, Block block){
         return Registry.register(Registries.ITEM, new Identifier(McDiscGolf.MOD_ID, name),
         new BlockItem(block, new FabricItemSettings()));
     }
 
-    private static Block registerBlock(String name, Block block) {
-        registerBlockItem(name, block);
-        return  Registry.register(Registries.BLOCK, new Identifier(McDiscGolf.MOD_ID, name), block);
+    private static Block registerBlock(String name, Block block, boolean with_block_item) {
+        if(with_block_item){
+            registerBlockItem(name, block);
+        }
+        return Registry.register(Registries.BLOCK, new Identifier(McDiscGolf.MOD_ID, name), block);
     }
 
     public static void registerModBlocks() {
