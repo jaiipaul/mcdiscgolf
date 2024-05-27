@@ -46,7 +46,6 @@ public class FrisbeeItem extends Item {
     }
 
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-      // McDiscGolf.LOGGER.info("Using fribee");
       if (!(user instanceof PlayerEntity)) {
         return;
       }
@@ -56,12 +55,13 @@ public class FrisbeeItem extends Item {
           int i = this.getMaxUseTime(stack) - remainingUseTicks;
           float f = getPullProgress(i);
 
-          frisbeeEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 2.5F + f * 0.5F, 1.0F);
+          frisbeeEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, 0.5F + f * 0.5F, 1.0F);
           if (playerEntity.getAbilities().creativeMode) {
             frisbeeEntity.pickupType = PickupPermission.CREATIVE_ONLY;
           }
+          world.playSound((PlayerEntity)null, user.getBlockPos(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
           world.spawnEntity(frisbeeEntity);
-          // McDiscGolf.LOGGER.info("spanwned fribee");
+
           if (!playerEntity.getAbilities().creativeMode) {
             playerEntity.getInventory().removeOne(stack);
           }
@@ -70,7 +70,6 @@ public class FrisbeeItem extends Item {
 
    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
       ItemStack itemStack = user.getStackInHand(hand);
-      // world.playSound((PlayerEntity)null, user.getBlockPos(), SoundEvents.ITEM_TRIDENT_THROW, SoundCategory.PLAYERS, 1.0F, 1.0F);
       user.setCurrentHand(hand);
       return TypedActionResult.consume(itemStack);
    }

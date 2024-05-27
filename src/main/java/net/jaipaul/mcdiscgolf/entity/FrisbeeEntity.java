@@ -47,28 +47,6 @@ import net.minecraft.world.World;
 public class FrisbeeEntity extends PersistentProjectileEntity  {
     private ItemStack frisbeeStack;
 
-    // public FrisbeeEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
-	// 	super(entityType, world);
-	// }
- 
-	// public FrisbeeEntity(World world, LivingEntity owner) {
-	// 	super(ModEntities.FRISBEE_ENTITY_TYPE, owner, world); // null will be changed later
-	// }
- 
-	// public FrisbeeEntity(World world, double x, double y, double z) {
-	// 	super(ModEntities.FRISBEE_ENTITY_TYPE, x, y, z, world); // null will be changed later
-	// }
- 
-	// @Override
-	// protected Item getDefaultItem() {
-	// 	return ModItems.FRISBEE_ITEM; // We will configure this later, once we have created the ProjectileItem.
-	// }
-
-    // @Override
-    // public Packet<ClientPlayPacketListener> createSpawnPacket() {
-    //     return new EntitySpawnS2CPacket(this);
-    // }
-
     public FrisbeeEntity(EntityType<? extends FrisbeeEntity> entityType, World world) {
         super(entityType, world);
         this.frisbeeStack = new ItemStack(ModItems.FRISBEE_ITEM);
@@ -80,6 +58,8 @@ public class FrisbeeEntity extends PersistentProjectileEntity  {
         this.frisbeeStack = stack.copy();
     }
 
+
+
     protected ItemStack asItemStack() {
         return this.frisbeeStack.copy();
     }
@@ -87,10 +67,6 @@ public class FrisbeeEntity extends PersistentProjectileEntity  {
     public ItemStack getStack() {
         return this.frisbeeStack.copy();
     }
-
-	// protected Item getDefaultItem() {
-    // 		return ModItems.FRISBEE_ITEM;
- 	// }
 
     // @Override
     // public void tick() {
@@ -215,33 +191,6 @@ public class FrisbeeEntity extends PersistentProjectileEntity  {
         return super.tryPickup(player) || this.isNoClip() && this.isOwner(player) && player.getInventory().insertStack(this.asItemStack());
     }
 
-    @Override
-    public void remove(RemovalReason reason) {
-        McDiscGolf.LOGGER.info("Remove frisbee");
-        super.remove(reason);
-    }
-    // public void onPlayerCollision(PlayerEntity player) {
-    //     if (this.isOwner(player) || this.getOwner() == null) {
-    //         super.onPlayerCollision(player);
-    //     }
-    // }
-
-    // public void readCustomDataFromNbt(NbtCompound nbt) {
-    //     super.readCustomDataFromNbt(nbt);
-    //     if (nbt.contains("Frisbee", 10)) {
-    //        this.frisbeeStack = ItemStack.fromNbt(nbt.getCompound("Frisbee"));
-    //     }
-    // }
-
-    // public void writeCustomDataToNbt(NbtCompound nbt) {
-    //     super.writeCustomDataToNbt(nbt);
-    //     nbt.put("Frisbee", this.frisbeeStack.writeNbt(new NbtCompound()));
-    // }
-
-    // protected float getDragInWater() {
-    //     return 0.99F;
-    // }
-    
     @Override
     public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
         return true;

@@ -5,23 +5,15 @@ import org.jetbrains.annotations.Nullable;
 
 import net.jaipaul.mcdiscgolf.McDiscGolf;
 import net.jaipaul.mcdiscgolf.blocks.entity.BasketEntity;
-import net.jaipaul.mcdiscgolf.blocks.entity.ModBlockEntities;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.HopperBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.block.TallPlantBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HopperBlockEntity;
-import net.minecraft.block.enums.DoorHinge;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -38,15 +30,12 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.event.GameEvent.Message;
 
 public class BasketBlock extends BlockWithEntity{
     protected static final VoxelShape BASKET_SHAPE = Block.createCuboidShape(0.0, 12.0, 0.0, 16.0, 18.0, 16.0);
@@ -75,7 +64,6 @@ public class BasketBlock extends BlockWithEntity{
  
     @Override
     public BlockRenderType getRenderType(BlockState state) {
-        //With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
         return BlockRenderType.MODEL;
     }
     
@@ -87,17 +75,9 @@ public class BasketBlock extends BlockWithEntity{
         return BOTTOM_SHAPE;
     }
 
-
-    // @Override
-    // public Box getBoundingBox(){
-        
-    // }
-
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            //This will call the createScreenHandlerFactory method from BlockWithEntity, which will return our blockEntity casted to
-            //a namedScreenHandlerFactory. If your block class does not extend BlockWithEntity, it needs to implement createScreenHandlerFactory.
             BlockPos basket_pos = pos;
             if(state.get(HALF) == DoubleBlockHalf.UPPER){
                 basket_pos = pos.down();
@@ -105,24 +85,12 @@ public class BasketBlock extends BlockWithEntity{
             NamedScreenHandlerFactory screenHandlerFactory = state.createScreenHandlerFactory(world, basket_pos);
  
             if (screenHandlerFactory != null) {
-                //With this call the server will request the client to open the appropriate Screenhandler
                 player.openHandledScreen(screenHandlerFactory);
             }
         }
         return ActionResult.SUCCESS;
     }
 
-    // @Override
-    // public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-    //     DoubleBlockHalf doubleBlockHalf = state.get(HALF);
-    //     if (!(direction.getAxis() != Direction.Axis.Y || doubleBlockHalf == DoubleBlockHalf.LOWER != (direction == Direction.UP) || neighborState.isOf(this) && neighborState.get(HALF) != doubleBlockHalf)) {
-    //         return Blocks.AIR.getDefaultState();
-    //     }
-    //     if (doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canPlaceAt(world, pos)) {
-    //         return Blocks.AIR.getDefaultState();
-    //     }
-    //     return state.getStateForNeighborUpdate(direction, neighborState, world, pos, neighborPos);
-    // }
 
     @Override
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -163,18 +131,15 @@ public class BasketBlock extends BlockWithEntity{
         builder.add(HALF);
     }
 
-    //This method will drop all items onto the ground when the block is broken
     @Override
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.hasBlockEntity() && state.getBlock() != newState.getBlock()) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof BasketEntity) {
                 ItemScatterer.spawn(world, pos, (BasketEntity)blockEntity);
-                // update comparators
                 world.updateComparators(pos,this);
             }
             world.removeBlockEntity(pos);
-            // state.onStateReplaced(world, pos, newState, moved);
         }
     }
 
@@ -187,32 +152,15 @@ public class BasketBlock extends BlockWithEntity{
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     }
-
-    // public long getRenderingSeed(BlockState state, BlockPos pos) {
-    //     return state.getRenderingSeed(pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1));
-    // }
     
-    // @Override
-    // public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-    //     VoxelShape collisionShape = VoxelShapes.union(BASKET_SHAPE, POLE_SHAPE, RIM_SHAPE);
-    //     return this.collidable ? collisionShape : VoxelShapes.empty();
-    // }
 
     @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        McDiscGolf.LOGGER.info("collision");
-        McDiscGolf.LOGGER.info(state.getCollisionShape(world, hit.getBlockPos(), null).toString());
         if(state.get(HALF) == DoubleBlockHalf.UPPER){
             BlockEntity blockEntity = world.getBlockEntity(hit.getBlockPos().down());
             if (blockEntity instanceof BasketEntity basketEntity) {
-                basketEntity.onEntityCollided(world, basketEntity.getPos(), projectile);
+                basketEntity.onEntityCollided(world, basketEntity.getPos(), projectile, hit);
             }
         }
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? null : BasketBlock.checkType(type, ModBlockEntities.BASKET_ENTITY, BasketEntity::tick);
     }
 }
