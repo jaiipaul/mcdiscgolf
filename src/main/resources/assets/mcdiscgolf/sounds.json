@@ -1,0 +1,13 @@
+{
+    "block.basket.chains": {
+      "sounds": [
+        "mcdiscgolf:basket_chains"
+      ]
+    },
+    "block.basket.hit": {
+      "sounds": [
+        "mcdiscgolf:basket_hit"
+      ]
+    }
+  }
+

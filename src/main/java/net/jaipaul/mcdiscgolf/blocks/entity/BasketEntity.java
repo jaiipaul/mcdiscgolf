@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import net.jaipaul.mcdiscgolf.entity.FrisbeeEntity;
 import net.jaipaul.mcdiscgolf.screen.BasketScreenHandler;
+import net.jaipaul.mcdiscgolf.sounds.ModSounds;
 import net.jaipaul.mcdiscgolf.utils.ImplementedInventory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -88,7 +89,6 @@ public class BasketEntity extends BlockEntity implements NamedScreenHandlerFacto
                     this.setStack(i, stack);
                     this.markDirty();
                     entity.discard();
-                    world.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     return;
                 };
             }
@@ -98,7 +98,8 @@ public class BasketEntity extends BlockEntity implements NamedScreenHandlerFacto
     public void onEntityCollided(World world, BlockPos pos, Entity entity, HitResult hit) {
         if (entity instanceof FrisbeeEntity && this.getChainsBox().contains(hit.getPos())){
             this.insertFrisbee(world, pos, (FrisbeeEntity)entity);
-        }    
+            world.playSound((PlayerEntity)null, pos, ModSounds.BASKET_CHAINS, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
     }
 
     public Box getChainsBox() {

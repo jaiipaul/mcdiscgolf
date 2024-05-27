@@ -16,7 +16,7 @@ public class ModEntities {
         Registries.ENTITY_TYPE,
         new Identifier(McDiscGolf.MOD_ID, "frisbee"),
         FabricEntityTypeBuilder.<FrisbeeEntity>create(SpawnGroup.MISC, FrisbeeEntity::new)
-            .dimensions(EntityDimensions.fixed(0.0625f, 0.0625f))
+            .dimensions(EntityDimensions.fixed(0.05f, 0.0625f))
             .build());
 
     public static void registerModEntities() {

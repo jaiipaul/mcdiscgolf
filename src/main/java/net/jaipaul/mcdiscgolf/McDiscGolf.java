@@ -7,6 +7,7 @@ import net.jaipaul.mcdiscgolf.entity.ModEntities;
 import net.jaipaul.mcdiscgolf.item.ModItemGroup;
 import net.jaipaul.mcdiscgolf.item.ModItems;
 import net.jaipaul.mcdiscgolf.screen.ModScreens;
+import net.jaipaul.mcdiscgolf.sounds.ModSounds;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,5 +26,6 @@ public class McDiscGolf implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModBlockEntities.registerBlockEntities();
 		ModScreens.registerModScreenHandlers();
+		ModSounds.registerModSounds();
 	}
 }

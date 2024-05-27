@@ -7,6 +7,7 @@ import net.jaipaul.mcdiscgolf.blocks.entity.BasketEntity;
 import net.jaipaul.mcdiscgolf.blocks.entity.ModBlockEntities;
 import net.jaipaul.mcdiscgolf.item.FrisbeeItem;
 import net.jaipaul.mcdiscgolf.item.ModItems;
+import net.jaipaul.mcdiscgolf.sounds.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
@@ -186,7 +187,14 @@ public class FrisbeeEntity extends PersistentProjectileEntity  {
     //     }
     // }
 
-    
+    @Override
+    protected void onBlockHit(BlockHitResult blockHitResult) {
+        if(this.getWorld().getBlockState(blockHitResult.getBlockPos()).getBlock() instanceof BasketBlock){
+            this.setSound(ModSounds.BASKET_HIT);
+        }
+        super.onBlockHit(blockHitResult);
+    }
+
     protected boolean tryPickup(PlayerEntity player) {
         return super.tryPickup(player) || this.isNoClip() && this.isOwner(player) && player.getInventory().insertStack(this.asItemStack());
     }
