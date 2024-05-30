@@ -1,0 +1,9 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "mcdiscgolf:block/metal_basket",
+		"1": "mcdiscgolf:block/light_gray_basket_rim",
+		"particle": "minecraft:block/iron_bars"
+	},
+	"parent": "mcdiscgolf:block/white_basket_chains"
+}

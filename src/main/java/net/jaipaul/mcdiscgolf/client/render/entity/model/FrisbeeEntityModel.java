@@ -1,6 +1,5 @@
 package net.jaipaul.mcdiscgolf.client.render.entity.model;
 
-import net.jaipaul.mcdiscgolf.entity.FrisbeeEntity;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;

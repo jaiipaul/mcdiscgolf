@@ -1,5 +1,20 @@
 {
     "itemgroup.discgolf": "Disc Golf",
     "item.mcdiscgolf.frisbee": "Frisbee",
-    "block.mcdiscgolf.basket": "Disc Golf Basket"
+    "block.mcdiscgolf.white_basket": "White DiscGolf Basket",
+    "block.mcdiscgolf.black_basket": "Black DiscGolf Basket",
+    "block.mcdiscgolf.gray_basket": "Gray DiscGolf Basket",
+    "block.mcdiscgolf.light_gray_basket": "Light Gray DiscGolf Basket",
+    "block.mcdiscgolf.purple_basket": "Purple DiscGolf Basket",
+    "block.mcdiscgolf.magenta_basket": "Magenta DiscGolf Basket",
+    "block.mcdiscgolf.pink_basket": "Pink DiscGolf Basket",
+    "block.mcdiscgolf.red_basket": "Red DiscGolf Basket",
+    "block.mcdiscgolf.blue_basket": "Blue DiscGolf Basket",
+    "block.mcdiscgolf.cyan_basket": "Cyan DiscGolf Basket",
+    "block.mcdiscgolf.light_blue_basket": "Light Blue DiscGolf Basket",
+    "block.mcdiscgolf.brown_basket": "Brown DiscGolf Basket",
+    "block.mcdiscgolf.green_basket": "Green DiscGolf Basket",
+    "block.mcdiscgolf.lime_basket": "Lime DiscGolf Basket",
+    "block.mcdiscgolf.orange_basket": "Orange DiscGolf Basket",
+    "block.mcdiscgolf.yellow_basket": "Yellow DiscGolf Basket"
 }

@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "pattern": [
+      "III",
+      "CCC",
+      " B "
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "C": {
+        "item": "minecraft:chain"
+      },
+      "B": {
+        "item": "minecraft:iron_bars"
+      }
+    },
+    "result": {
+      "item": "mcdiscgolf:white_basket",
+      "count": 1
+    }
+  }
+

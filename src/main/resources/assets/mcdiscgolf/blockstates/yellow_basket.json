@@ -4,7 +4,7 @@
             "model": "mcdiscgolf:block/basket_base"
           },
         "half=upper": {
-            "model": "mcdiscgolf:block/basket_chains"
+            "model": "mcdiscgolf:block/yellow_basket_chains"
           }
     }
 }

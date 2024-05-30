@@ -20,7 +20,22 @@ public class ModItemGroup {
             .icon(() -> new ItemStack(ModItems.FRISBEE_ITEM))
             .entries((displayContext, entries) -> {
 
-                entries.add(ModBlocks.BASKET_BLOCK);
+                entries.add(ModBlocks.WHITE_BASKET_BLOCK);
+                entries.add(ModBlocks.BLACK_BASKET_BLOCK);
+                entries.add(ModBlocks.GRAY_BASKET_BLOCK);
+                entries.add(ModBlocks.LIGHT_GRAY_BASKET_BLOCK);
+                entries.add(ModBlocks.BROWN_BASKET_BLOCK);
+                entries.add(ModBlocks.PURPLE_BASKET_BLOCK);
+                entries.add(ModBlocks.MAGENTA_BASKET_BLOCK);
+                entries.add(ModBlocks.LIGHT_BLUE_BASKET_BLOCK);
+                entries.add(ModBlocks.BLUE_BASKET_BLOCK);
+                entries.add(ModBlocks.CYAN_BASKET_BLOCK);
+                entries.add(ModBlocks.LIME_BASKET_BLOCK);
+                entries.add(ModBlocks.GREEN_BASKET_BLOCK);
+                entries.add(ModBlocks.RED_BASKET_BLOCK);
+                entries.add(ModBlocks.PINK_BASKET_BLOCK);
+                entries.add(ModBlocks.YELLOW_BASKET_BLOCK);
+                entries.add(ModBlocks.ORANGE_BASKET_BLOCK);
                 entries.add(ModItems.FRISBEE_ITEM);
             
             })

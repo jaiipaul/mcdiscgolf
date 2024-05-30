@@ -1,10 +1,8 @@
 {
-	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/block",
 	"render": "transluscent",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "mcdiscgolf:block/basket",
+		"0": "mcdiscgolf:block/metal_basket",
 		"particle": "minecraft:block/iron_bars"
 	},
 	"elements": [
@@ -19,7 +17,7 @@
 				"south": {"uv": [2, 0, 16, 1], "rotation": 90, "texture": "#0"},
 				"west": {"uv": [2, 0, 16, 1], "rotation": 90, "texture": "#0"},
 				"up": {"uv": [8, 1, 9, 2], "texture": "#0"},
-				"down": {"uv": [9, 1, 10, 2], "texture": "#0", "cullface": "down"}
+				"down": {"uv": [9, 1, 10, 2], "texture": "#0"}
 			}
 		},
 		{
@@ -28,8 +26,8 @@
 			"to": [16, 12, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 4, 0]},
 			"faces": {
-				"up": {"uv": [0, 8, 8, 16], "texture": "#0", "cullface": "up"},
-				"down": {"uv": [0, 8, 8, 16], "texture": "#0", "cullface": "down"}
+				"up": {"uv": [0, 8, 8, 16], "texture": "#0"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#0"}
 			}
 		},
 		{
