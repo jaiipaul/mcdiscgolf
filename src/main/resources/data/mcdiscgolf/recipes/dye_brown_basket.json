@@ -1,0 +1,60 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "group": "basket",
+    "ingredients": [
+      {
+        "item": "minecraft:brown_dye"
+      },
+      [
+        {
+          "item": "mcdiscgolf:blue_basket"
+        },
+        {
+          "item": "mcdiscgolf:black_basket"
+        },
+        {
+          "item": "mcdiscgolf:cyan_basket"
+        },
+        {
+          "item": "mcdiscgolf:gray_basket"
+        },
+        {
+          "item": "mcdiscgolf:green_basket"
+        },
+        {
+          "item": "mcdiscgolf:light_blue_basket"
+        },
+        {
+          "item": "mcdiscgolf:light_gray_basket"
+        },
+        {
+          "item": "mcdiscgolf:lime_basket"
+        },
+        {
+          "item": "mcdiscgolf:magenta_basket"
+        },
+        {
+          "item": "mcdiscgolf:orange_basket"
+        },
+        {
+          "item": "mcdiscgolf:pink_basket"
+        },
+        {
+          "item": "mcdiscgolf:purple_basket"
+        },
+        {
+          "item": "mcdiscgolf:red_basket"
+        },
+        {
+          "item": "mcdiscgolf:yellow_basket"
+        },
+        {
+          "item": "mcdiscgolf:white_basket"
+        }
+      ]
+    ],
+    "result": {
+      "item": "mcdiscgolf:brown_basket"
+    }
+  }

@@ -99,9 +99,9 @@ public class BasketBlock extends BlockWithEntity{
         if (!(direction.getAxis() != Direction.Axis.Y || doubleBlockHalf == DoubleBlockHalf.LOWER != (direction == Direction.UP) || neighborState.isOf(this) && neighborState.get(HALF) != doubleBlockHalf)) {
             return Blocks.AIR.getDefaultState();
         }
-        if (doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canPlaceAt(world, pos)) {
-            return Blocks.AIR.getDefaultState();
-        }
+        // if (doubleBlockHalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !state.canPlaceAt(world, pos)) {
+        //     return Blocks.AIR.getDefaultState();
+        // }
         return state;
     }
 
@@ -114,7 +114,7 @@ public class BasketBlock extends BlockWithEntity{
             DoubleBlockHalf doubleBlockHalf = state.get(HALF);
             if (doubleBlockHalf == DoubleBlockHalf.UPPER && (blockState = world.getBlockState(blockPos = pos.down())).isOf(state.getBlock()) && blockState.get(HALF) == DoubleBlockHalf.LOWER) {
                 BlockState blockState2 = blockState.getFluidState().isOf(Fluids.WATER) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState();
-                world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL | Block.SKIP_DROPS);
+                world.setBlockState(blockPos, blockState2, Block.NOTIFY_ALL);
                 world.syncWorldEvent(player, WorldEvents.BLOCK_BROKEN, blockPos, Block.getRawIdFromState(blockState));
             }
         }
