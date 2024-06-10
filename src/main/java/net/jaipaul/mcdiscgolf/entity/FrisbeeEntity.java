@@ -1,31 +1,82 @@
 package net.jaipaul.mcdiscgolf.entity;
 
 import net.jaipaul.mcdiscgolf.blocks.custom.BasketBlock;
+import net.jaipaul.mcdiscgolf.item.FrisbeeItem;
 import net.jaipaul.mcdiscgolf.item.ModItems;
 import net.jaipaul.mcdiscgolf.sounds.ModSounds;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 
 
 public class FrisbeeEntity extends PersistentProjectileEntity  {
-    private ItemStack frisbeeStack;
+    private ItemStack frisbeeStack = new ItemStack(ModItems.FRISBEE_ITEM);
+    private static final TrackedData<Integer> COLOR = DataTracker.registerData(FrisbeeEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private boolean colorSet;
 
     public FrisbeeEntity(EntityType<? extends FrisbeeEntity> entityType, World world) {
-        super(entityType, world);
-        this.frisbeeStack = new ItemStack(ModItems.FRISBEE_ITEM);
+        super((EntityType<? extends PersistentProjectileEntity>)entityType, world);
+        this.initColor();
     }
 
-    public FrisbeeEntity(World world, PlayerEntity player, ItemStack stack) {
-        super(ModEntities.FRISBEE_ENTITY_TYPE, player, world);
-        this.frisbeeStack = new ItemStack(ModItems.FRISBEE_ITEM);
-        this.frisbeeStack = stack.copy();
+    public FrisbeeEntity(World world, LivingEntity owner) {
+        super(ModEntities.FRISBEE_ENTITY_TYPE, owner, world);
+        System.out.println();
+        
     }
 
+    public void initFromStack(ItemStack stack) {
+        if (stack.isOf(ModItems.FRISBEE_ITEM)) {
+            this.frisbeeStack = new ItemStack(ModItems.FRISBEE_ITEM);
+            this.frisbeeStack = stack.copy();
+            this.setColor(((FrisbeeItem)(stack.getItem())).getColor(stack));
+        }
+    }
 
+    private void initColor() {
+        this.colorSet = false;
+        this.dataTracker.set(COLOR, -1);
+    }
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(COLOR, -1);
+    }
+
+    public int getColor() {
+        return this.dataTracker.get(COLOR);
+    }
+
+    private void setColor(int color) {
+        this.colorSet = true;
+        this.dataTracker.set(COLOR, color);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        if(this.colorSet){
+            nbt.putInt("Color", this.getColor());
+        }
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        if (nbt.contains("Color", NbtElement.NUMBER_TYPE)) {
+           this.setColor(nbt.getInt("Color"));
+        }
+    }
 
     protected ItemStack asItemStack() {
         return this.frisbeeStack.copy();

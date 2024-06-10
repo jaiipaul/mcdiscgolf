@@ -5,6 +5,6 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
 public class ModModelLayers {
-    public static final EntityModelLayer FRISBEE =
+    public static final EntityModelLayer FRISBEE_MODEL =
             new EntityModelLayer(new Identifier(McDiscGolf.MOD_ID, "frisbee"), "main"); 
 }

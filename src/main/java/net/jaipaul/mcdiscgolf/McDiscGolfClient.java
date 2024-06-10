@@ -2,6 +2,7 @@ package net.jaipaul.mcdiscgolf;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.jaipaul.mcdiscgolf.blocks.ModBlocks;
@@ -9,10 +10,14 @@ import net.jaipaul.mcdiscgolf.client.render.entity.FrisbeeEntityRenderer;
 import net.jaipaul.mcdiscgolf.client.render.entity.layer.ModModelLayers;
 import net.jaipaul.mcdiscgolf.client.render.entity.model.FrisbeeEntityModel;
 import net.jaipaul.mcdiscgolf.entity.ModEntities;
+import net.jaipaul.mcdiscgolf.item.ModItems;
 import net.jaipaul.mcdiscgolf.screen.BasketScreen;
 import net.jaipaul.mcdiscgolf.screen.ModScreens;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.recipe.RecipeSerializer;
 
 public class McDiscGolfClient implements ClientModInitializer {
 
@@ -20,10 +25,17 @@ public class McDiscGolfClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         
-        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FRISBEE, FrisbeeEntityModel::getTexturedModelData);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.FRISBEE_MODEL, FrisbeeEntityModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.FRISBEE_ENTITY_TYPE, FrisbeeEntityRenderer::new);
-        // EntityRendererRegistry.register(ModEntities.FRISBEE_ENTITY_TYPE, (context) -> new FlyingItemEntityRenderer(context));
         HandledScreens.register(ModScreens.BASKET_SCREEN_HANDLER, BasketScreen::new);
+        
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            NbtCompound nbtCompound = stack.getSubNbt("display");
+            if (nbtCompound != null && nbtCompound.contains("color", NbtElement.NUMBER_TYPE)) {
+                return nbtCompound.getInt("color");
+            }
+            return 0xFFFFFF;
+        }, ModItems.FRISBEE_ITEM);
 
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.WHITE_BASKET_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BLACK_BASKET_BLOCK, RenderLayer.getCutout());

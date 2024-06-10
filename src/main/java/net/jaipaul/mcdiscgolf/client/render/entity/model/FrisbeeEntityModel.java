@@ -1,5 +1,8 @@
 package net.jaipaul.mcdiscgolf.client.render.entity.model;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.model.ModelPartBuilder;
@@ -8,11 +11,11 @@ import net.minecraft.client.model.ModelTransform;
 import net.minecraft.client.model.TexturedModelData;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 
-public class FrisbeeEntityModel extends EntityModel<Entity>{
+
+@Environment(value=EnvType.CLIENT)
+public class FrisbeeEntityModel extends Model{
     private final ModelPart root;
 
     public FrisbeeEntityModel(ModelPart root){
@@ -23,12 +26,13 @@ public class FrisbeeEntityModel extends EntityModel<Entity>{
     public static TexturedModelData getTexturedModelData(){
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild("disc", ModelPartBuilder.create().uv(0, 0).cuboid(0.F, -4.0F, -4.0F, 1.0F, 8.0F, 8.0F), ModelTransform.NONE);
-        return TexturedModelData.of(modelData, 16, 16);
-    }
+        ModelPartData modelPartData2 = modelPartData.addChild("center", ModelPartBuilder.create().uv(0, 0).cuboid(-3.0F, -1.F, -3.0F, 6.0F, 1.0F, 6.0F), ModelTransform.NONE);
+        modelPartData2.addChild("rim_front", ModelPartBuilder.create().uv(0, 7).cuboid(-3.F, -1.F, -4.F, 6.0F, 1.0F, 1.0F), ModelTransform.NONE);
+        modelPartData2.addChild("rim_back", ModelPartBuilder.create().uv(0, 9).cuboid(-3.F, -1.F, 3.F,  6.0F, 1.0F, 1.0F), ModelTransform.NONE);
+        modelPartData2.addChild("rim_left", ModelPartBuilder.create().uv(0, 18).cuboid(3.F, -1.F, -3.0F, 1.0F, 1.0F, 6.0F), ModelTransform.NONE);
+        modelPartData2.addChild("rim_right", ModelPartBuilder.create().uv(0, 11).cuboid(-4.F, -1.F, -3.0F, 1.0F, 1.0F, 6.0F), ModelTransform.NONE);
 
-    @Override
-    public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        return TexturedModelData.of(modelData, 32, 32);
     }
 
     @Override

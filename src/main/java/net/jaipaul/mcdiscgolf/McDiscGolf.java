@@ -6,6 +6,7 @@ import net.jaipaul.mcdiscgolf.blocks.entity.ModBlockEntities;
 import net.jaipaul.mcdiscgolf.entity.ModEntities;
 import net.jaipaul.mcdiscgolf.item.ModItemGroup;
 import net.jaipaul.mcdiscgolf.item.ModItems;
+import net.jaipaul.mcdiscgolf.recipe.ModRecipes;
 import net.jaipaul.mcdiscgolf.screen.ModScreens;
 import net.jaipaul.mcdiscgolf.sounds.ModSounds;
 
@@ -27,5 +28,6 @@ public class McDiscGolf implements ModInitializer {
 		ModBlockEntities.registerBlockEntities();
 		ModScreens.registerModScreenHandlers();
 		ModSounds.registerModSounds();
+		ModRecipes.registerModeRecipes();
 	}
 }

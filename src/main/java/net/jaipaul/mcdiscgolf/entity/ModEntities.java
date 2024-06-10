@@ -16,6 +16,8 @@ public class ModEntities {
         Registries.ENTITY_TYPE,
         new Identifier(McDiscGolf.MOD_ID, "frisbee"),
         FabricEntityTypeBuilder.<FrisbeeEntity>create(SpawnGroup.MISC, FrisbeeEntity::new)
+            .trackRangeBlocks(4)
+            .trackedUpdateRate(20)
             .dimensions(EntityDimensions.fixed(0.5f, 0.0625f))
             .build());
 

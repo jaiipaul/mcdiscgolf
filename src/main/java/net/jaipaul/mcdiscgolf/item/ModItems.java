@@ -28,7 +28,7 @@ public class ModItems {
     public static final Item RED_BASKET_ITEM = registerTallItem("red_basket", new TallBlockItem(ModBlocks.RED_BASKET_BLOCK, new FabricItemSettings().maxCount(1)));
     public static final Item YELLOW_BASKET_ITEM = registerTallItem("yellow_basket", new TallBlockItem(ModBlocks.YELLOW_BASKET_BLOCK, new FabricItemSettings().maxCount(1)));
     public static final Item ORANGE_BASKET_ITEM = registerTallItem("orange_basket", new TallBlockItem(ModBlocks.ORANGE_BASKET_BLOCK, new FabricItemSettings().maxCount(1)));
-    
+
     private static Item registerItem(String name, Item item) {
         return  Registry.register(Registries.ITEM, new Identifier(McDiscGolf.MOD_ID, name), item);
     }
